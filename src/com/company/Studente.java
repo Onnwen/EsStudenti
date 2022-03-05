@@ -19,18 +19,23 @@ public class Studente extends Persona implements Cloneable {
         this.votiTotali = 0;
     }
 
+    public Studente(Studente studente) {
+        super(studente.getNome(), studente.getCognome());
+        this.classe = studente.getClasse();
+        this.voti = studente.getVoti();
+        this.votiTotali = studente.getVoti().length;
+    }
+
     public void setVoti(Voto[] voti) {
         this.voti = voti;
         this.votiTotali = voti.length;
     }
 
-    public Studente shallowClone() {
-        Studente newStudente = new Studente(getNome(), getCognome(), classe);
-        newStudente.setVoti(voti);
-        return newStudente;
+    public Studente deepClone() {
+        return new Studente(this);
     }
 
-    public Studente deepClone() throws CloneNotSupportedException {
+    public Studente shallowClone() throws CloneNotSupportedException {
         return (Studente) this.clone();
     }
 
